@@ -1,4 +1,4 @@
-package com.darcy.common.message;
+package top.doublespring.common.message;
 
 /**
  * 接口响应，所有接口返回的JSON数据应由此类承载

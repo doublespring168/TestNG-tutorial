@@ -1,4 +1,4 @@
-package com.darcy.common.log;
+package top.doublespring.common.log;
 
 public enum LC {
 

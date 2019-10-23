@@ -1,7 +1,7 @@
-package com.darcy.common.exception;
+package top.doublespring.common.exception;
 
 
-import com.darcy.common.message.MsgType;
+import top.doublespring.common.message.MsgType;
 
 /**
  * 业务异常

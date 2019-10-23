@@ -6,10 +6,10 @@
 
     <test name="test-排除方法">
         <classes>
-            <class name="com.darcy.demos.T001"/>
-            <class name="com.darcy.demos.T002"/>
-            <class name="com.darcy.demos.T003"/>
-            <class name="com.darcy.demos.T004">
+            <class name="top.doublespring.demos.T001"/>
+            <class name="top.doublespring.demos.T002"/>
+            <class name="top.doublespring.demos.T003"/>
+            <class name="top.doublespring.demos.T004">
                 <methods>
                     <!--排除某个方法-->
                     <!--<exclude name="t0030201"></exclude>-->

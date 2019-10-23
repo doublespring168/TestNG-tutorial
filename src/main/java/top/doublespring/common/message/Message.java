@@ -1,4 +1,4 @@
-package com.darcy.common.message;
+package top.doublespring.common.message;
 
 import java.io.Serializable;
 

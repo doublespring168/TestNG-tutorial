@@ -1,9 +1,9 @@
-package com.darcy.annotation;
+package top.doublespring.annotation;
 
 import com.alibaba.fastjson.JSONObject;
-import com.darcy.common.log.LC;
-import com.darcy.common.log.LogUtil;
 import org.testng.annotations.*;
+import top.doublespring.common.log.LC;
+import top.doublespring.common.log.LogUtil;
 
 public class FunctionalAnnotation {
 

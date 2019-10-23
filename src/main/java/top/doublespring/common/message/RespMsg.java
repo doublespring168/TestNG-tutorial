@@ -1,4 +1,4 @@
-package com.darcy.common.message;
+package top.doublespring.common.message;
 
 /**
  * 功能说明： 接口调用响应参数

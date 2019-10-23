@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="suite-指定package">
+<suite name="suite-指定package" preserve-order="false">
 
     <parameter name="id" value="t004"></parameter>
 
@@ -37,7 +37,7 @@
     </test>
 
 
-    <!--排除package中的某子级目录-->
+    <!--排除package中的子级目录-->
     <test name="test-指定package-04">
 
         <parameter name="id" value="t004-4"></parameter>

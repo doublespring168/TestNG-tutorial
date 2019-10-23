@@ -1,9 +1,9 @@
-package com.darcy.demos.childPackage;
+package top.doublespring.demos.childPackage;
 
-import com.darcy.common.log.LC;
-import com.darcy.common.log.LogUtil;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import top.doublespring.common.log.LC;
+import top.doublespring.common.log.LogUtil;
 
 public class C001 {
 

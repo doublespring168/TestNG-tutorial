@@ -12,7 +12,7 @@
         <!-- 仅能有一组classes-->
         <classes>
             <!--可包含多个class-->
-            <class name="com.darcy.demos.T001"/>
+            <class name="top.doublespring.demos.T001"/>
         </classes>
 
     </test>

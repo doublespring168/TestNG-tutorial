@@ -6,9 +6,9 @@
 
     <test name="test-多个测试类">
         <classes>
-            <class name="com.darcy.demos.T001"/>
-            <class name="com.darcy.demos.T002"/>
-            <class name="com.darcy.demos.T003"/>
+            <class name="top.doublespring.demos.T001"/>
+            <class name="top.doublespring.demos.T002"/>
+            <class name="top.doublespring.demos.T003"/>
         </classes>
     </test>
 </suite>
