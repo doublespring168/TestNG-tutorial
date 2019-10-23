@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<!-- 一个xml测试文档,仅能配置一个suite,name值会显示在控制台日志中-->
+<suite name="suite-XML示例">
+
+    <!--向程序传参数-->
+    <parameter name="id" value="t001"></parameter>
+
+    <!-- 可以包含多组test-->
+    <test name="test-XML示例">
+
+        <!-- 仅能有一组classes-->
+        <classes>
+            <!--可包含多个class-->
+            <class name="top.doublespring.demos.T001"/>
+        </classes>
+
+    </test>
+
+</suite>
+
+

@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="suite-仅测试某个或某几个方法">
+
+    <parameter name="id" value="t002"></parameter>
+
+    <test name="test-测试某个方法">
+        <classes>
+            <class name="top.doublespring.demos.T002">
+                <methods>
+                    <!--只要使用了include,就仅运行这里指定的方法-->
+                    <include name="t002001"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="test-测试某几个方法">
+        <classes>
+            <class name="top.doublespring.demos.T002">
+                <methods>
+                    <exclude name="t002001"></exclude>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
+
+
