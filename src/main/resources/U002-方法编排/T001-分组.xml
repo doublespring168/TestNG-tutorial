@@ -1,0 +1,117 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="suite-分组">
+
+    <parameter name="id" value="t004"></parameter>
+
+    <!--suite级别定义测试类扫描范围-->
+    <packages>
+        <package name="top.doublespring.group.*"></package>
+    </packages>
+
+
+    <!--引入某些组-->
+    <test name="test-引入某些组">
+
+        <parameter name="id" value="g001-1"></parameter>
+
+        <!--仅能包含一组 groups -->
+        <groups>
+            <run>
+                <include name="g001"></include>
+                <include name="g002"></include>
+            </run>
+        </groups>
+
+    </test>
+
+    <!--排除某些组-->
+    <test name="test-排除某些组">
+
+        <parameter name="id" value="g001-2"></parameter>
+
+        <groups>
+            <run>
+                <exclude name="g001"></exclude>
+                <exclude name="g002"></exclude>
+                <exclude name="g004"></exclude>
+            </run>
+        </groups>
+
+    </test>
+
+
+    <!-- 定义组中组 -->
+    <test name="test-组中组">
+
+        <parameter name="id" value="g001-3"></parameter>
+
+        <groups>
+            <define name="g001-3-1">
+                <include name="g001"/>
+            </define>
+
+            <define name="g001-3-2">
+                <include name="g002"/>
+            </define>
+
+            <define name="g001-3-3">
+                <include name="g003"/>
+            </define>
+
+            <define name="g001-3-4">
+                <include name="g001-3-1"/>
+                <include name="g001-3-2"/>
+                <include name="g001-3-3"/>
+            </define>
+
+            <run>
+                <include name="g001-3-4"/>
+                <!--排除某些分组-->
+                <exclude name="g001-3-2"></exclude>
+            </run>
+
+        </groups>
+
+    </test>
+
+
+    <!-- 组间依赖关系   -->
+    <test name="test-组依赖-001">
+
+        <parameter name="id" value="g001-4"></parameter>
+
+        <groups>
+            <run>
+                <include name="g001"/>
+                <include name="g002"/>
+                <include name="g003"/>
+            </run>
+            <dependencies>
+                <group name="g002" depends-on="g001"></group>
+                <group name="g003" depends-on="g002"></group>
+            </dependencies>
+        </groups>
+    </test>
+
+    <test name="test-组依赖-002">
+
+        <parameter name="id" value="g001-5"></parameter>
+
+        <groups>
+            <run>
+                <include name="g001"/>
+                <include name="g002"/>
+                <include name="g003"/>
+            </run>
+            <dependencies>
+                <group name="g002" depends-on="g003"></group>
+                <group name="g001" depends-on="g002"></group>
+            </dependencies>
+        </groups>
+    </test>
+
+
+</suite>
+
+
