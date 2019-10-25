@@ -1,0 +1,77 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="suite-group级流程编排.xml">
+
+    <packages>
+        <package name="top.doublespring.composite.*"></package>
+    </packages>
+
+    <!--
+    实验条件:
+    1)test-001、test-002、test-003、test-004中均引入了3个组,分别为g001、g002和g003;
+    2)test-001和test-002,组的排列顺序不同;
+    3)在test-003中,3个组的依赖关系为g003依赖g002,而g002依赖g001;
+    4)在test-004中,3个组的依赖关系为g003依赖g001,而g001依赖g002;
+    -->
+
+    <test name="test-001">
+        <parameter name="id" value="g001-1"></parameter>
+        <groups>
+            <run>
+                <include name="g001"/>
+                <include name="g002"/>
+                <include name="g003"/>
+            </run>
+        </groups>
+    </test>
+
+    <test name="test-002">
+        <parameter name="id" value="g001-2"></parameter>
+        <groups>
+            <run>
+                <include name="g002"/>
+                <include name="g003"/>
+                <include name="g001"/>
+            </run>
+        </groups>
+    </test>
+
+    <test name="test-003">
+        <parameter name="id" value="g001-3"></parameter>
+        <groups>
+            <run>
+                <include name="g001"/>
+                <include name="g002"/>
+                <include name="g003"/>
+            </run>
+            <dependencies>
+                <group name="g002" depends-on="g001"></group>
+                <group name="g003" depends-on="g002"></group>
+            </dependencies>
+        </groups>
+    </test>
+
+    <test name="test-004">
+        <parameter name="id" value="g001-4"></parameter>
+        <groups>
+            <run>
+                <include name="g001"/>
+                <include name="g002"/>
+                <include name="g003"/>
+            </run>
+            <dependencies>
+                <group name="g001" depends-on="g003"></group>
+                <group name="g002" depends-on="g001"></group>
+            </dependencies>
+        </groups>
+    </test>
+
+    <!--
+    实验结果:
+    1)通过test-001和test-002运行结果,可以看出,在未指定group依赖关系的情况下,组中类的运行是没有规律的;
+    2)而指定依赖关系的group,如test-003和test-004,测试类的执行顺序,均是按照group声明的依赖关系执行的;
+    -->
+
+</suite>
+
+

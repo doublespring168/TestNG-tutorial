@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="suite-suite级流程编排">
+
+    <!--
+    实验条件:
+    1)依次在suite-files中引入P003-group级流程编排、P002-class级流程编排、P004-test级流程编排和P001-方法级流程编排;
+    -->
+
+    <suite-files>
+        <suite-file path="P003-group级流程编排.xml"></suite-file>
+        <suite-file path="P002-class级流程编排.xml"></suite-file>
+        <suite-file path="P004-test级流程编排.xml"></suite-file>
+        <suite-file path="P001-方法级流程编排.xml"></suite-file>
+    </suite-files>
+
+    <!--
+    实验结果:
+    1)suite-files中的每个suite-file均是按照声明顺序执行的;
+    2)每个suite-file中测试类的执行顺序不变;
+    -->
+
+
+</suite>
+
+

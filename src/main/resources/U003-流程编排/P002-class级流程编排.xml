@@ -1,0 +1,61 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="suite-class级流程编排">
+
+
+    <!--
+    实验条件:
+    1)test-001、test-002中声明的class相同,但是先后顺序不同;
+    2)test-003是在test-002基础上,使用package引入了子包;
+    -->
+
+    <test name="test-001">
+
+        <parameter name="id" value="p001-1"></parameter>
+        <classes>
+            <class name="top.doublespring.composite.T001"></class>
+            <class name="top.doublespring.composite.T002"></class>
+            <class name="top.doublespring.composite.T003"></class>
+            <class name="top.doublespring.composite.T004"></class>
+        </classes>
+    </test>
+
+
+    <test name="test-002">
+
+        <parameter name="id" value="p001-2"></parameter>
+        <classes>
+            <class name="top.doublespring.composite.T003"></class>
+            <class name="top.doublespring.composite.T002"></class>
+            <class name="top.doublespring.composite.T004"></class>
+            <class name="top.doublespring.composite.T001"></class>
+        </classes>
+    </test>
+
+    <test name="test-003">
+
+        <parameter name="id" value="p001-3"></parameter>
+
+        <packages>
+            <package name="top.doublespring.composite.childPackage"></package>
+        </packages>
+
+        <classes>
+            <class name="top.doublespring.composite.T003"></class>
+            <class name="top.doublespring.composite.T002"></class>
+            <class name="top.doublespring.composite.T004"></class>
+            <class name="top.doublespring.composite.T001"></class>
+        </classes>
+
+    </test>
+
+    <!--
+    实验结果:
+    1)相同test和classes内的所有待测类,方法的执行顺序是按照类配置的先后顺序执行的;
+    2)如果一个test内同时有packages和classes时,packages和classes包含的类的执行顺序没有保证;
+
+    -->
+
+</suite>
+
+

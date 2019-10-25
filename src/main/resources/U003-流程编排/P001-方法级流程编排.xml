@@ -1,0 +1,49 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="suite-方法级流程编排">
+
+    <!--
+    实验条件:
+    1)类T003、T004和T0041,方法命名约定为t00400X形式,其中X为数字;
+    2)类T003、T004中方法排列顺序相反;
+    3)类T003、T0041中方法名相同,类T0041中方法指定了优先级priority;
+
+    -->
+
+    <test name="test-001">
+
+        <parameter name="id" value="p001-1"></parameter>
+        <classes>
+            <class name="top.doublespring.composite.T004"></class>
+        </classes>
+    </test>
+
+
+    <test name="test-002">
+
+        <parameter name="id" value="p001-2"></parameter>
+        <classes>
+            <class name="top.doublespring.composite.T003"></class>
+        </classes>
+    </test>
+
+
+    <test name="test-003">
+
+        <parameter name="id" value="p001-3"></parameter>
+        <classes>
+            <class name="top.doublespring.composite.T0041"></class>
+        </classes>
+    </test>
+
+
+    <!--
+    实验结果:
+    1)同一个类中的方法,默认是按照方法名的ASCII顺序正序排序,而不是方法声明的先后顺序;
+    2)同一个类中的方法,可以通过@Test注解参数priority值改变方法运行先后顺序,priority值越小,越早被执行;
+
+    -->
+
+</suite>
+
+
