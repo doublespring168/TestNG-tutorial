@@ -19,4 +19,4 @@
 # JVM crash logs
 hs_err_pid*.log
 
-
+logs/*
