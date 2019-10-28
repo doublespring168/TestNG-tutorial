@@ -1,17 +1,15 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >-->
 
 <suite name="suite-功能性注解-group">
 
     <parameter name="id" value="f002-1"></parameter>
 
-    <packages>
-        <package name="top.doublespring.annotation"></package>
-    </packages>
-
     <!--
     实验条件:
-    1)test-001中引入了组g002;
-    2)top.doublespring.annotation包下有功能性注解测试类FunctionalAnnotation,而FunctionalAnnotation中定义了@BeforeGroups和@AfterGroups注解;
+    1)T002和T003类中方法定义几乎相同,区别在于T002中的@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解,没有指定所属组,而T003中相关方法指定了所属组;
+    2)T003和T0031类中的待测试方法,均属于同一个组,区别在于T0031类中没有定义@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解方法;
+    3)test-004和test-003对比组实验中,测试类均相同,test-004中添加了功能性注解类FunctionalAnnotation;
+    4)test-004和test-005对比组实验中,测试类均相同,区别是,test-005中引入的功能性注解类为FunctionalAnnotation2,FunctionalAnnotation2中@BeforeSuite、@AfterSuite、@BeforeTest、和@AfterTest注解均指定了所属组g003;
     -->
 
     <test name="test-001">
@@ -21,6 +19,9 @@
                 <include name="g002"/>
             </run>
         </groups>
+        <classes>
+            <class name="top.doublespring.annotation.T002"></class>
+        </classes>
     </test>
 
 
@@ -31,16 +32,63 @@
                 <include name="g003"/>
             </run>
         </groups>
+        <classes>
+            <class name="top.doublespring.annotation.T003"></class>
+        </classes>
+    </test>
+
+    <test name="test-003">
+        <parameter name="id" value="f003-3"></parameter>
+        <groups>
+            <run>
+                <include name="g003"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="top.doublespring.annotation.T003"></class>
+            <class name="top.doublespring.annotation.T0031"></class>
+        </classes>
+    </test>
+
+    <test name="test-004">
+        <parameter name="id" value="f003-4"></parameter>
+        <groups>
+            <run>
+                <include name="g003"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="top.doublespring.annotation.T003"></class>
+            <class name="top.doublespring.annotation.T0031"></class>
+            <class name="top.doublespring.annotation.FunctionalAnnotation"></class>
+        </classes>
+    </test>
+
+
+    <test name="test-005">
+        <parameter name="id" value="f003-5"></parameter>
+        <groups>
+            <run>
+                <include name="g003"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="top.doublespring.annotation.T003"></class>
+            <class name="top.doublespring.annotation.T0031"></class>
+            <class name="top.doublespring.annotation.FunctionalAnnotation2"></class>
+        </classes>
     </test>
 
 
     <!--
     实验结果:
-    1)观察到FunctionalAnnotation类中添加的@BeforeSuite、@BeforeTest、@AfterTest、@AfterSuite注解的方法均被调用,其他注解方法均没有执行;
-    2)类T002中被注解@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod修饰的方法,均被多次执行,而T001类中没有定义相关方法,所以没有看到相关日志,
-    由此可以得出,@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解使用范围是当前待测测试类;
-    3)由于test-001和test-002中均引入了T002类,所以@BeforeClass和@AfterClass均被调用了2次;
-    4)由于T002类中有2个方法,可以看到,每次执行这2个方法前后,均会执行@BeforeMethod和@AfterMethod注解的方法;
+    1)test-001和test-002对比可知,测试类中的@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解,均需要指定所属组;
+    2)test-002和test-003对比可知,即便是同一个组的方法,位于不同测试类中时,注解@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod对应的方法,作用域也仅限于当前定义类;
+    3)test-003和test-004对比可知,加入了功能性注解类FunctionalAnnotation,除了@BeforeGroups和@AfterGroups外,其他所有的@BeforeXXX和@AfterXXX,均没有指定所属组,可以看到这些方法均没有运行;
+    4)test-003和test-004对比可知,@BeforeGroups注解方法执行的时间要晚于@BeforeClass,早于@BeforeMethod注解的方法;@AfterGroups注解方法执行要晚于@AfterClass,@AfterClass又晚于@AfterClass;
+    5)test-004和test-005对比可知,在指定了@BeforeSuite、@BeforeTest、@AfterSuite和AfterTest所属组后,这些注解对应的方法都执行了,执行顺序为
+    @BeforeSuite >> @BeforeTest >> @BeforeClass >> @BeforeGroups >> @BeforeMethod
+    @AfterMethod >> @AfterClass >> @AfterGroups >> @AfterTest >> @AfterSuite
     -->
 
 </suite>

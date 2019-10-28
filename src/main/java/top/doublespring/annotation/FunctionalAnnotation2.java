@@ -5,11 +5,11 @@ import org.testng.annotations.*;
 import top.doublespring.common.log.LC;
 import top.doublespring.common.log.LogUtil;
 
-public class FunctionalAnnotation {
+public class FunctionalAnnotation2 {
 
 
     @Parameters({"id"})
-    @BeforeSuite(description = "开始测试")
+    @BeforeSuite(groups = "g003")
     public JSONObject beforeSuite(String id) {
         LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @BeforeSuite"));
         System.out.println();
@@ -17,7 +17,7 @@ public class FunctionalAnnotation {
     }
 
     @Parameters({"id"})
-    @AfterSuite()
+    @AfterSuite(groups = "g003")
     public JSONObject afterSuite(String id) {
         LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @AfterSuite"));
         System.out.println();
@@ -25,7 +25,7 @@ public class FunctionalAnnotation {
     }
 
     @Parameters({"id"})
-    @BeforeTest()
+    @BeforeTest(groups = "g003")
     public JSONObject beforeTest(String id) {
         System.out.println();
         LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @BeforeTest"));
@@ -33,7 +33,7 @@ public class FunctionalAnnotation {
     }
 
     @Parameters({"id"})
-    @AfterTest()
+    @AfterTest(groups = "g003")
     public JSONObject afterTest(String id) {
         LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @AfterTest"));
         System.out.println();

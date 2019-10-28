@@ -9,13 +9,13 @@ public class T003 {
 
     @Parameters({"id"})
     @Test(groups = {"g003"})
-    public void t002001(String id) {
+    public void t003001(String id) {
         LogUtil.info(LC.C_100, String.format(" id=%s", id));
     }
 
     @Parameters({"id"})
     @Test(groups = {"g003"})
-    public void t002002(String id) {
+    public void t003002(String id) {
         LogUtil.info(LC.C_100, String.format(" id=%s", id));
     }
 
