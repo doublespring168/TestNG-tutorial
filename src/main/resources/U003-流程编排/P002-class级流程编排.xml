@@ -51,8 +51,8 @@
 
     <!--
     实验结果:
-    1)相同test和classes内的所有待测类,方法的执行顺序是按照类配置的先后顺序执行的;
-    2)如果一个test内同时有packages和classes时,packages和classes包含的类的执行顺序没有保证;
+    1)test-001和test-002对比可知,相同test和classes内的所有待测类,方法的执行顺序是按照类配置的先后顺序执行的;
+    2)test-002和test-003对比可知,如果一个test内同时有packages和classes时,packages和classes包含的类的执行顺序没有保证;
 
     -->
 

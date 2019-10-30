@@ -26,7 +26,7 @@
 
     <test name="test-003">
 
-        <parameter name="id" value="p001-2"></parameter>
+        <parameter name="id" value="p001-3"></parameter>
         <classes>
             <class name="top.doublespring.composite.T004"></class>
         </classes>
@@ -34,7 +34,7 @@
 
     <test name="test-004">
 
-        <parameter name="id" value="p001-2"></parameter>
+        <parameter name="id" value="p001-4"></parameter>
         <classes>
             <class name="top.doublespring.composite.T001"></class>
         </classes>
@@ -43,7 +43,7 @@
 
     <!--
     实验结果:
-    1)同一个suite内,不同test之间的执行顺序就是声明顺序;
+    1)test-001、test-002、test-003和test-004对比可知,同一个suite内,不同test之间的执行顺序就是声明顺序;
     -->
 
 </suite>

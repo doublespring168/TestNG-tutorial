@@ -49,7 +49,7 @@
         <packages>
             <package name="top.doublespring.demos.*">
                 <exclude name="top.doublespring.demos.childPackage"></exclude>
-                <!-- <include> 无效,可再次使用package代替 -->
+                <!-- <include> 无效,可再次使用 package 代替 -->
             </package>
             <package name="top.doublespring.demos.childPackage"></package>
         </packages>
