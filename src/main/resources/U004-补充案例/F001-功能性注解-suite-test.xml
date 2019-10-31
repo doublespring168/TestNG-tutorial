@@ -1,4 +1,4 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >-->
 
 <suite name="suite-功能性注解-1-suit-test">
 
@@ -42,10 +42,11 @@
 
     <!--
     实验结果:
-    1)观察到FunctionalAnnotation类中添加的@BeforeSuite、@BeforeTest、@AfterTest、@AfterSuite注解的方法均被调用;
-    2)在当前suite作用域内任一待测方法调用前,执行了@BeforeSuite注解的方法;在当前suite作用域内所有待测方法调用后,执行了@AfterSuite注解的方法;
-    2)同样,对于引入了 FunctionalAnnotation 注解类的test,在当前test作用域内,任一待测方法调用前,执行了@BeforeTest注解的方法,任一待测方法调用后,执行了@AfterTest注解的方法;
-    3)FunctionalAnnotation中的其他@BeforeXXX和@AfterXXX注解方法均没有执行;
+    1)test-001、test-002和test-003对比可知,只要当前suite中引入了@BeforeSuite、@AfterSuite注解方法(无论定义在哪个类中),
+        则相关方法均会在当前suite之前、之后执行,且@BeforeSuite注解方法入参参数值,是suite内一级parameter子节点定义的变量值,
+        而@AfterSuite注解方法入参参数值,是suite内最后一次parameter赋值后的变量值;
+    2)test-001和test-002、test-003对比可知,只要当前test引入了@BeforeTest、@AfterTest注解方法(无论定义在哪个类中),则相关方法均会在当前test之前、之后执行;
+    3)而FunctionalAnnotation中的其他@BeforeXXX和@AfterXXX注解方法均没有执行;
     -->
 
 </suite>

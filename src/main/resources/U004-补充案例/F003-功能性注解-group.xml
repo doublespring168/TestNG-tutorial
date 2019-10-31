@@ -6,10 +6,14 @@
 
     <!--
     实验条件:
-    1)T002和T003类中方法定义几乎相同,区别在于T002中的@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解,没有指定所属组,而T003中相关方法指定了所属组;
+    1)T002和T003类中方法定义几乎相同,区别在于T002中的@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解,没有指定所属组,
+        而T003中相关方法指定了所属组;
     2)T003和T0031类中的待测试方法,均属于同一个组,区别在于T0031类中没有定义@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解方法;
-    3)test-004和test-003对比组实验中,测试类均相同,test-004中添加了功能性注解类FunctionalAnnotation;
-    4)test-004和test-005对比组实验中,测试类均相同,区别是,test-005中引入的功能性注解类为FunctionalAnnotation2,FunctionalAnnotation2中@BeforeSuite、@AfterSuite、@BeforeTest、和@AfterTest注解均指定了所属组g003;
+    3)test-003和test-004对比组实验中,测试类均相同,test-004中添加了功能性注解类FunctionalAnnotation;
+    4)test-004和test-005对比组实验中,测试类均相同,区别是test-005中引入的功能性注解类为FunctionalAnnotation2,
+        FunctionalAnnotation2中所有@BeforeXXX和@AfterXXX直接方法均指定了所属组g003;
+    5)test-005和test-006对比组实验中,测试类均相同,区别是test-006中引入的功能性注解类为FunctionalAnnotation2和FunctionalAnnotatio3,
+        这2个注解类中的的方法完全相同;
     -->
 
     <test name="test-001">
@@ -80,15 +84,55 @@
     </test>
 
 
+    <test name="test-006">
+        <parameter name="id" value="f003-6"></parameter>
+        <groups>
+            <run>
+                <include name="g003"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="top.doublespring.annotation.T003"></class>
+            <class name="top.doublespring.annotation.T0031"></class>
+            <class name="top.doublespring.annotation.FunctionalAnnotation2"></class>
+            <class name="top.doublespring.annotation.FunctionalAnnotation3"></class>
+        </classes>
+    </test>
+
+
     <!--
     实验结果:
-    1)test-001和test-002对比可知,测试类中的@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解,均需要指定所属组;
-    2)test-002和test-003对比可知,即便是同一个组的方法,位于不同测试类中时,注解@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod对应的方法,作用域也仅限于当前定义类;
-    3)test-003和test-004对比可知,加入了功能性注解类FunctionalAnnotation,除了@BeforeGroups和@AfterGroups外,其他所有的@BeforeXXX和@AfterXXX,均没有指定所属组,可以看到这些方法均没有运行;
-    4)test-003和test-004对比可知,@BeforeGroups注解方法执行的时间要晚于@BeforeClass,早于@BeforeMethod注解的方法;@AfterGroups注解方法执行要晚于@AfterClass,@AfterClass又晚于@AfterClass;
-    5)test-004和test-005对比可知,在指定了@BeforeSuite、@BeforeTest、@AfterSuite和AfterTest所属组后,这些注解对应的方法都执行了,执行顺序为
-    @BeforeSuite >> @BeforeTest >> @BeforeClass >> @BeforeGroups >> @BeforeMethod
-    @AfterMethod >> @AfterClass >> @AfterGroups >> @AfterTest >> @AfterSuite
+    1)test-001和test-002对比可知,分组测试中,测试类中的@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解,均需要指定所属组;
+    2)test-002和test-003对比可知,即便是同一个组的方法,位于不同测试类中时,注解@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod对应的方法,
+        作用域也仅限于当前定义类,而不是覆盖当前分组分布的所有类;
+    3)test-003和test-004对比可知,test-004中虽然引入了功能性注解类FunctionalAnnotation,但是由于@BeforeGroups、@AfterGroups、@BeforeTest和
+        @AfterTest均没有指定所属组,所以相关注解方法均没有执行;
+    4)test-004和test-005对比可知,功能性注解类FunctionalAnnotation2中各@BeforeXXX和@AfterXXX方法均指定了所属组,因此@BeforeGroups、@AfterGroups、
+        @BeforeTest和@AfterTest注解方法均被执行,同时可以看到虽然@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod也指定了所属组,
+        但是这些方法也没有被执行;
+    5)test-005和test-006对比可知,同一个test中,@BeforeGroups、@AfterGroups、@BeforeTest和@AfterTest注解方法,如果定义了多个,只要是所属组相同,
+        则这些方法均会被调用;
+
+    6)@BeforeXXX方法执行顺序是:
+        @BeforeSuite >> @BeforeTest >> @BeforeClass >> @BeforeGroups >> @BeforeMethod
+      @AfterXXX方法执行顺序是:
+        @AfterMethod >> @AfterClass >> @AfterGroups >> @AfterTest >> @AfterSuite
+
+
+    -->
+
+    <!--
+    至此,功能性注解可以做一个总结:
+    在我们编写测试用例时,如遇到测试单元执行前条件初始化、执行后记录日志、打开或关闭连接等需求时,就可以使用功能性注解来完成。功能性注解是作用在
+    suite、test、class、group和method级别的注解,被这些注解修饰的方法,均会在相应级别测试单元运行时”恰好“被调用;
+
+    1)@BeforeClass、@AfterClass、@BeforeMethod和@AfterMethod注解方法均需要定义在相应测试类中,而@BeforeSuite、@AfterSuite、@BeforeGroups、
+        @AfterGroups、@BeforeTest和@AfterTest则无此硬性要求,只要被引入即可;
+    2)我们可以将test分为2类,一类是传统直接引入class方式(称为非组test),一类是通过定义组、运行组的方式(称为组test),其中非组test中,所有作用域内定义的
+        @BeforeXXX和@AfterXXX注解的方法,均不需要指定@Test注解的groups属性值,相反组test中,均需要明确定义;
+
+
+
     -->
 
 </suite>

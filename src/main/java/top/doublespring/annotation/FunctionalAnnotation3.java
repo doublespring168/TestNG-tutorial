@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 import top.doublespring.common.log.LC;
 import top.doublespring.common.log.LogUtil;
 
-public class FunctionalAnnotation2 {
+public class FunctionalAnnotation3 {
 
 
     @Parameters({"id"})

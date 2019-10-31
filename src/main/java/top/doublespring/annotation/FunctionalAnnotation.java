@@ -69,23 +69,7 @@ public class FunctionalAnnotation {
     }
 
     @Parameters({"id"})
-    @BeforeGroups("g002")
-    public JSONObject beforeGroups(String id) {
-        System.out.println();
-        LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @BeforeGroups for group g002"));
-        return null;
-    }
-
-    @Parameters({"id"})
-    @AfterGroups("g002")
-    public JSONObject afterGroups(String id) {
-        LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @AfterGroups for group g002"));
-        System.out.println();
-        return null;
-    }
-
-    @Parameters({"id"})
-    @BeforeGroups("g003")
+    @BeforeGroups()
     public JSONObject beforeGroups3(String id) {
         System.out.println();
         LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @BeforeGroups for group g003"));
@@ -93,7 +77,7 @@ public class FunctionalAnnotation {
     }
 
     @Parameters({"id"})
-    @AfterGroups("g003")
+    @AfterGroups()
     public JSONObject afterGroups3(String id) {
         LogUtil.info(LC.C_100, String.format(" id=%s,%s", id, " -->  @AfterGroups for group g003"));
         System.out.println();
